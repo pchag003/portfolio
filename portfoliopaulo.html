@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paulo Chagwasi | Professional Portfolio</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <style>
+    /* Root Variables */
+    :root {
+      --neon-gold: #ffd700;
+      --cyber-blue: #00f7ff;
+      --dark-bg: #0a0a0a;
+      --glass-bg: rgba(255, 255, 255, 0.05);
+    }
+
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: var(--dark-bg);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    /* Navigation */
+    nav {
+      padding: 1.5rem 5%;
+      position: fixed;
+      width: 100%;
+      backdrop-filter: blur(10px);
+      background: var(--glass-bg);
+      z-index: 1000;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--neon-gold);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 5%;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px var(--cyber-blue);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--dark-bg);
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px var(--neon-gold);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Tools Section */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .tool-category {
+      background: var(--glass-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .tool-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    .tool-list {
+      columns: 2;
+      list-style: none;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .tool-list.active {
+      max-height: 500px;
+    }
+
+    .tool-list li {
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .tool-list li::before {
+      content: "▹";
+      position: absolute;
+      left: 0;
+      color: var(--neon-gold);
+    }
+
+    /* Services Section */
+    #services .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: var(--glass-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Dropdowns for Availability and Payment Options */
+    .service-dropdowns {
+      margin-top: 2rem;
+    }
+
+    .dropdown {
+      background: var(--glass-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    .dropdown-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+      margin-top: 0.5rem;
+    }
+
+    .dropdown-content.active {
+      max-height: 500px;
+    }
+
+    .dropdown-content ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+
+    .dropdown-content ul li {
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    .dropdown-content ul li::before {
+      content: "▹";
+      position: relative;
+      left: -1rem;
+      color: var(--neon-gold);
+    }
+
+    .rotate {
+      transform: rotate(180deg);
+      transition: transform 0.3s;
+    }
+
+    /* Clients / Companies Section */
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .client-card {
+      background: var(--glass-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .client-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Professionals Section */
+    .professionals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .professional-card {
+      background: var(--glass-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .professional-card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Reviews Section */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background: var(--glass-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      font-style: italic;
+      transition: transform 0.3s;
+      position: relative;
+    }
+
+    .review-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .reviewer {
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    /* Contact Form */
+    .contact-form {
+      background: var(--glass-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      margin-top: 2rem;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: var(--dark-bg);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      resize: none;
+    }
+
+    .contact-form button {
+      background: var(--neon-gold);
+      color: var(--dark-bg);
+      border: none;
+      padding: 1rem 2rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: var(--cyber-blue);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem 5%;
+      background: var(--glass-bg);
+      margin-top: 3rem;
+    }
+
+    footer .social-icons {
+      margin-bottom: 1rem;
+    }
+
+    footer .social-icons a {
+      color: white;
+      margin: 0 0.5rem;
+      font-size: 1.5rem;
+      transition: color 0.3s;
+    }
+
+    footer .social-icons a:hover {
+      color: var(--neon-gold);
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      .tools-grid,
+      #services .services-grid {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#tools">Tools</a>
+      <a href="#services">Services</a>
+      <a href="#clients">Clients</a>
+      <a href="#professionals">Professionals</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <h1>PAULO CHAGWASI</h1>
+    <p>Strategic Virtual Assistant &amp; Tech Professional</p>
+  </section>
+
+  <!-- Tools Section -->
+  <section id="tools">
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="tools-grid">
+      <!-- CRM Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>CRM Tools</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Zoho CRM</li>
+          <li>HubSpot</li>
+          <li>Salesforce</li>
+          <li>Bitrix24</li>
+          <li>Follow Up Boss</li>
+        </ul>
+      </div>
+      <!-- Communication Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Communication</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Slack</li>
+          <li>Zoom</li>
+          <li>Google Meet</li>
+          <li>Skype</li>
+          <li>Dialpad</li>
+          <li>Microsoft Teams</li>
+          <li>Telegram</li>
+          <li>WhatsApp</li>
+        </ul>
+      </div>
+      <!-- AI Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>AI Tools</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>GPT-4 Turbo (0409)</li>
+          <li>o1-preview</li>
+          <li>GPT-4 Omni (0807)</li>
+          <li>Claude 3.5 Sonnet</li>
+          <li>Gemini Pro 1.5</li>
+          <li>Claude 3 Opus</li>
+          <li>Llama 3.3 70B</li>
+          <li>DeepSeek-R1</li>
+          <li>Qwen2.5 32B</li>
+          <li>GPT-4o (0806)</li>
+          <li>BERT (Bidirectional Encoder Representations from Transformers)</li>
+          <li>T5 (Text-to-Text Transfer Transformer)</li>
+          <li>RoBERTa (Robustly Optimized BERT Pretraining Approach)</li>
+          <li>XLNet</li>
+          <li>ALBERT (A Lite BERT)</li>
+          <li>ERNIE (Enhanced Representation through Knowledge Integration)</li>
+          <li>DistilBERT</li>
+          <li>CTRL (Conditional Transformer Language Model)</li>
+          <li>Windsurf</li>
+          <li>Vercel</li>
+        </ul>
+      </div>
+      <!-- Web Development Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Web Development</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>HTML</li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>Web Design</li>
+        </ul>
+      </div>
+      <!-- Productivity Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Productivity Tools</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Trello</li>
+          <li>Asana</li>
+          <li>Notion</li>
+          <li>ClickUp</li>
+          <li>Todoist</li>
+        </ul>
+      </div>
+      <!-- Design & Development Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Design &amp; Development</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Figma</li>
+          <li>Sketch</li>
+          <li>Adobe XD</li>
+          <li>Bootstrap</li>
+          <li>Tailwind CSS</li>
+          <li>jQuery</li>
+        </ul>
+      </div>
+      <!-- Data Analysis & Visualization -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Data Analysis &amp; Visualization</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Google Analytics</li>
+          <li>Tableau</li>
+          <li>Microsoft Power BI</li>
+          <li>Google Data Studio</li>
+        </ul>
+      </div>
+      <!-- Cloud Platforms & Services -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Cloud Platforms &amp; Services</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>AWS</li>
+          <li>Google Cloud</li>
+          <li>Microsoft Azure</li>
+          <li>DigitalOcean</li>
+          <li>Heroku</li>
+        </ul>
+      </div>
+      <!-- Version Control & Collaboration -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Version Control &amp; Collaboration</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Git</li>
+          <li>GitHub</li>
+          <li>GitLab</li>
+          <li>Bitbucket</li>
+          <li>SourceTree</li>
+        </ul>
+      </div>
+      <!-- Automation Tools -->
+      <div class="tool-category">
+        <div class="tool-header">
+          <h3>Automation Tools</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <ul class="tool-list">
+          <li>Zapier</li>
+          <li>Integromat (Make)</li>
+          <li>IFTTT</li>
+          <li>Power Automate</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services">
+    <h2 class="section-title">Current Services Offered</h2>
+    <div class="services-grid">
+      <div class="service-card">
+        <h3>Admin Tasks / Executive Assistance</h3>
+        <ul>
+          <li>Seamless email and calendar management</li>
+          <li>Precise data organization</li>
+          <li>Efficient document preparation</li>
+          <li>Hassle-free appointment scheduling</li>
+          <li>Prompt and professional customer support</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3>Social Media Management</h3>
+        <ul>
+          <li>Enhance brand visibility and engagement</li>
+          <li>Create stunning flyers, posters, brochures, and more</li>
+          <li>Short, impactful video creation</li>
+          <li>Effective ad posting on social media platforms and realtor websites</li>
+          <li>Posting ads in all realtor websites</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3>Website Management</h3>
+        <ul>
+          <li>Custom template website creation</li>
+          <li>Regular updates and revisions</li>
+          <li>Engaging blog/content writing</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3>Data Entry</h3>
+        <ul>
+          <li>Thorough research for high-potential leads</li>
+          <li>Persuasive email outreach and follow-ups</li>
+          <li>Robust lead database management</li>
+          <li>Organized lead uploading and management</li>
+          <li>Strategic lead generation techniques</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3>Customer Relations Management</h3>
+        <ul>
+          <li>Responsive phone/email support</li>
+          <li>Streamlined customer order processing</li>
+          <li>Detailed customer database maintenance</li>
+        </ul>
+      </div>
+      <div class="service-card">
+        <h3>Personal Assistance</h3>
+        <ul>
+          <li>Manage your personal schedule effortlessly</li>
+          <li>Book flights and travel accommodations</li>
+          <li>Set reminders for important tasks</li>
+          <li>Personal shopping services</li>
+          <li>Handling necessary payments</li>
+        </ul>
+      </div>
+    </div>
+    <div class="service-dropdowns">
+      <div class="dropdown">
+        <div class="dropdown-header">
+          <h3>Availability</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-content">
+          <ul>
+            <li>Full-time assistance: 8 hours a day, 40 hours a week</li>
+            <li>Part-time support: 4 hours a day, 20 hours a week</li>
+            <li>Project-based help: 2 hours a day, up to 10 hours a week</li>
+            <li>Plus, we're available on weekends for added convenience.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="dropdown">
+        <div class="dropdown-header">
+          <h3>Flexible Payment Options</h3>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="dropdown-content">
+          <ul>
+            <li>PayPal</li>
+            <li>Venmo</li>
+            <li>Zelle</li>
+            <li>ACH</li>
+            <li>Wire Transfer</li>
+            <li>Payoneer</li>
+            <li>Google Pay</li>
+            <li>Cash App</li>
+            <li>Square</li>
+            <li>ACH Debit</li>
+          </ul>
+        </div>
+      </div>
+      <p style="text-align:center; margin-top:1rem;"><strong>No long-term contract required!</strong> Cancel anytime with ease.</p>
+    </div>
+  </section>
+
+  <!-- Clients / Companies Section -->
+  <section id="clients">
+    <h2 class="section-title">Clients/Companies I Have Worked With</h2>
+    <div class="clients-grid">
+      <div class="client-card">
+        <a href="https://ras360.com.au/" target="_blank" style="color: inherit; text-decoration: none;">
+          RAAS PROPERTY GROUP
+        </a>
+      </div>
+      <div class="client-card">
+        <a href="http://www.windowpropertygroup.com" target="_blank" style="color: inherit; text-decoration: none;">
+          Window Property Group
+        </a>
+      </div>
+      <div class="client-card">
+        New Zealand Sotheby's International Realty
+      </div>
+    </div>
+  </section>
+
+  <!-- Professionals Section -->
+  <section id="professionals">
+    <h2 class="section-title">Real Estate Professionals</h2>
+    <div class="professionals-grid">
+      <div class="professional-card">David Penrose</div>
+      <div class="professional-card">Onis Asare</div>
+      <div class="professional-card">Orlando Heart</div>
+      <div class="professional-card">Stacey Green</div>
+      <div class="professional-card">Ping Xu</div>
+      <div class="professional-card">Colleen Choisnet</div>
+      <div class="professional-card">Brittany Johnson</div>
+      <div class="professional-card">Rick Baer</div>
+      <div class="professional-card">Catherine Pineda</div>
+      <div class="professional-card">Steven Norris</div>
+      <div class="professional-card">Justine Lin</div>
+      <div class="professional-card">Christopher LaBarge</div>
+      <div class="professional-card">Matthew Slosar</div>
+      <div class="professional-card">Pam Moll</div>
+      <div class="professional-card">Trelise Guest</div>
+      <div class="professional-card">Dean Ramsden</div>
+      <div class="professional-card">Heather Ann O'Leary</div>
+      <div class="professional-card">Demeeka Cobb</div>
+      <div class="professional-card">Phuong Nguyen</div>
+      <div class="professional-card">Maria Munoz</div>
+      <div class="professional-card">Clayton Humphries</div>
+      <div class="professional-card">Angela Cassadime</div>
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <section id="reviews">
+    <h2 class="section-title">Reviews</h2>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p>"Paulo's expertise and professionalism exceeded our expectations. His guidance was invaluable!"</p>
+        <div class="reviewer">– David Penrose</div>
+      </div>
+      <div class="review-card">
+        <p>"Working with Paulo has been a game-changer for our operations. Highly recommended!"</p>
+        <div class="reviewer">– Onis Asare</div>
+      </div>
+      <div class="review-card">
+        <p>"His attention to detail and commitment to excellence made our project a huge success."</p>
+        <div class="reviewer">– Orlando Heart</div>
+      </div>
+      <div class="review-card">
+        <p>"Paulo's strategic insights and technical skills are top-notch. A true professional."</p>
+        <div class="reviewer">– Stacey Green</div>
+      </div>
+      <div class="review-card">
+        <p>"Our collaboration with Paulo has brought remarkable improvements to our workflow."</p>
+        <div class="reviewer">– Ping Xu</div>
+      </div>
+      <div class="review-card">
+        <p>"Paulo's innovative solutions have streamlined our processes significantly."</p>
+        <div class="reviewer">– Colleen Choisnet</div>
+      </div>
+      <div class="review-card">
+        <p>"An absolute pleasure to work with—professional, responsive, and creative."</p>
+        <div class="reviewer">– Brittany Johnson</div>
+      </div>
+      <div class="review-card">
+        <p>"He brings a unique blend of technical expertise and strategic vision to every project."</p>
+        <div class="reviewer">– Rick Baer</div>
+      </div>
+      <div class="review-card">
+        <p>"Paulo's contributions have been essential in driving our success forward."</p>
+        <div class="reviewer">– Catherine Pineda</div>
+      </div>
+      <div class="review-card">
+        <p>"Innovative, dedicated, and efficient—Paulo is truly a top-tier professional."</p>
+        <div class="reviewer">– Steven Norris</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2 class="section-title">Contact Me</h2>
+    <form class="contact-form">
+      <input type="text" placeholder="Your Name" required />
+      <input type="email" placeholder="Your Email" required />
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.threads.net" target="_blank"><i class="fab fa-threads"></i></a>
+      <a href="https://www.x.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.reddit.com" target="_blank"><i class="fab fa-reddit-alien"></i></a>
+    </div>
+    <p>&copy; 2025 Paulo Chagwasi. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Particles.js
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        shape: { type: "circle", stroke: { width: 0, color: "#fff" } },
+        opacity: {
+          value: 0.5,
+          random: false,
+          anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+        },
+        size: { value: 3, random: true, anim: { enable: false } },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: "#ffffff",
+          opacity: 0.4,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 6,
+          direction: "none",
+          random: false,
+          straight: false,
+          out_mode: "out"
+        }
+      },
+      interactivity: {
+        detect_on: "window",
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        }
+      }
+    });
+
+    // Toggle Tool Categories
+    document.querySelectorAll(".tool-header").forEach(header => {
+      header.addEventListener("click", () => {
+        header.nextElementSibling.classList.toggle("active");
+      });
+    });
+
+    // Toggle Dropdowns for Availability and Payment Options
+    document.querySelectorAll(".dropdown-header").forEach(header => {
+      header.addEventListener("click", () => {
+        const content = header.nextElementSibling;
+        content.classList.toggle("active");
+        header.querySelector("i").classList.toggle("rotate");
+      });
+    });
+  </script>
+</body>
+</html>
